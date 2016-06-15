@@ -13,3 +13,18 @@ feature 'Creating links' do
     end
   end
 end
+
+feature 'Tags' do
+  scenario 'I can add a single tag to a new link' do
+    visit '/links/new'
+    fill_in 'url', with: 'http://www.zombo.com/'
+    fill_in 'title' , with: 'This is Zombocom'
+    fill_in 'tag', with: 'Seahorse'
+    click_button :submit
+    link = Link.first
+    expect(link.tags.map(&:name)).to include('Seahorse')
+  end
+  scenario 'When you visit bubbles, only links tagged with bubbles show' do
+
+  end
+end
